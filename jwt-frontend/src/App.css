@@ -1,0 +1,15 @@
+#root {
+  margin: auto;
+}
+.login_form {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.register_form {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}

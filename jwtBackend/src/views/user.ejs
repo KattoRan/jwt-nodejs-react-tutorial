@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center mb-5 mt-5"> Quản lí người dùng </h1>
+            <form class="d-flex col-6 ms-auto" method="get" action="/user">
+                <button class="input-group-text me-1" type="submit"><i class="bi bi-search"></i></button>
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search" value="<%=user_search%>">
+            </form>
+            <div class="table-users">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-success">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (userList.length> 0) { %>
+                            <% userList.forEach(function(item,index) { %>
+                                <tr>
+                                    <th scope="row"> <%= index+1 %> </th>
+                                    <td> <%= item.email %> </td>
+                                    <td> <%= item.username %> </td>
+                                    <td>
+                                        <a href="/user/edit-user/<%= item.id %>" class="btn btn-warning">
+                                            edit
+                                        </a>    
+                                        <form action="/user/delete-user/<%= item.id %>" method="post" style="display: inline;">
+                                            <button class="btn btn-danger">delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4" class="text-center text-danger fw-bold">Không có người dùng nào!</td>
+                            </tr>
+                        <% } %>
+                        <tr>
+                            <td colspan="4" class="text-center" id="add">
+                                <button class="btn btn-success fw-bold" type="submit" >
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div hidden class="col-6 shadow p-4 mt-5 mb-5 mx-auto" id="formAdd">
+                <form id="createForm" method="POST" action="/user?redirect=user">
+                    <div class="d-flex justify-content-between">
+                        <h1>Update a new user</h1>
+                        <i class="bi bi-x-lg fs-3" id="closeForm" style="cursor: pointer;"></i>
+                    </div>
+                    <input hidden name="id">
+                    <div class="mb-3 mt-5">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <script>
+                document.getElementById("add").addEventListener("click", function (event) {
+                    document.getElementById("formAdd").removeAttribute("hidden");
+                    document.getElementById("formAdd").scrollIntoView({ behavior: "smooth", block: "start" }); // Cuộn xuống form
+                })
+                document.getElementById("closeForm").addEventListener("click", function(event){
+                    document.getElementById("formAdd").hidden = true;
+                })
+            </script>
+        </div>
+    </div>
+    
+</body>
+</html>

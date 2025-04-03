@@ -1,0 +1,27 @@
+{
+  "name": "js_pj",
+  "version": "1.0.0",
+  "description": "jwt nodejs react",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/server.js"
+  },
+  "author": "Mel",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "7.26.0",
+    "@babel/node": "7.26.0",
+    "@babel/preset-env": "7.26.0",
+    "bcryptjs": "3.0.2",
+    "body-parser": "1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "16.4.7",
+    "ejs": "3.1.10",
+    "express": "4.21.2",
+    "mysql2": "3.13.0",
+    "nodemon": "3.1.9",
+    "sequelize": "6.37.6",
+    "sequelize-cli": "6.6.2"
+  }
+}

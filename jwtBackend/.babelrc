@@ -1,0 +1,6 @@
+// noi cau hinh trinh dich code
+{
+    "presets": [
+        "@babel/preset-env"
+    ]
+}

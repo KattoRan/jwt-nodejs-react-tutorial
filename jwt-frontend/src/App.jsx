@@ -6,6 +6,7 @@ import NavComponent from "./components/navigation/nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
+import UseManager from "./components/userManager/user";
 import { ToastContainer } from "react-toastify";
 function App() {
   //const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/user-manager" element={<UseManager />}></Route>
       </Routes>
       <ToastContainer
         position="top-right"

@@ -6,4 +6,7 @@ const RegisterUser = async (userData) => {
 const LoginUser = async (userData) => {
   return await axios.post("http://localhost:8085/api/login", userData);
 };
-export { RegisterUser, LoginUser };
+const getAllUsers = async () => {
+  return await axios.get("http://localhost:3000/api/user-manager"); // đường dẫn tới API của bạn
+};
+export { RegisterUser, LoginUser, getAllUsers };

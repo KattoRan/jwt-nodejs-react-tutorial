@@ -7,12 +7,14 @@ import { RegisterUser } from "../../service/userService";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const defaultcheckInput = {
     isValidEmail: true,
     isValidPhone: true,
+    isValidAddress: true,
     isValidPassword: true,
     isValidConfirmPassword: true,
   };
@@ -26,6 +28,10 @@ const Register = () => {
       newCheck.isValidEmail = false;
     }
     if (!phone) {
+      toast.error("Phone is required!");
+      newCheck.isValidPhone = false;
+    }
+    if (!address) {
       toast.error("Phone is required!");
       newCheck.isValidPhone = false;
     }
@@ -50,7 +56,7 @@ const Register = () => {
     event.preventDefault();
     if (!isValidInputs()) return;
 
-    const userData = { email, phone, username, password };
+    const userData = { email, phone, address, username, password };
     try {
       const res = await RegisterUser(userData);
       if (res.data.EC == 0) {
@@ -86,6 +92,16 @@ const Register = () => {
                   placeholder="Phone number"
                   value={phone}
                   onChange={(event) => setPhone(event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-2" controlId="Address">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  className={objCheckInput.isValidAddress ? "" : "is-invalid"}
+                  type="text"
+                  placeholder="Address"
+                  value={address}
+                  onChange={(event) => setAddress(event.target.value)}
                 />
               </Form.Group>
               <Form.Group className="mb-2" controlId="Username">

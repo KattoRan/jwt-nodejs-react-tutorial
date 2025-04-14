@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src/server.js"
+    "start": "nodemon --exec babel-node src/server.js",
+    "migration": "npx sequelize-cli db:migrate"
   },
   "author": "Mel",
   "license": "ISC",
@@ -21,7 +22,10 @@
     "express": "4.21.2",
     "mysql2": "3.13.0",
     "nodemon": "3.1.9",
-    "sequelize": "6.37.6",
-    "sequelize-cli": "6.6.2"
+    "sequelize": "6.37.6"
+  },
+  "devDependencies": {
+    "sequelize-auto-migrations": "^1.0.3",
+    "sequelize-cli": "^6.6.2"
   }
 }

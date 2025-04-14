@@ -51,6 +51,7 @@ const RegisterNewuser = async (userData) => {
       username: userData.username,
       email: userData.email,
       phone: userData.phone,
+      address: userData.address,
       password: hashPass,
     });
 
@@ -59,6 +60,7 @@ const RegisterNewuser = async (userData) => {
       EC: 0,
     };
   } catch (error) {
+    console.error(">>> error", error);
     return {
       EM: "Something wrongs in service...",
       EC: -2,

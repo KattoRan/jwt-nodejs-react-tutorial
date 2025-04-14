@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Container, Form, Row, Button, Image } from "react-bootstrap";
+import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoginUser } from "../../service/userService";
@@ -91,15 +91,6 @@ const Login = () => {
                 </Button>
               </Form.Group>
             </Form>
-          </Col>
-          <Col sm={8} className="text-center">
-            <Image
-              className="custom-img"
-              src="/anh1.jpg"
-              fluid
-              rounded
-              style={{ maxHeight: "80vh", objectFit: "cover" }}
-            />
           </Col>
         </Row>
       </Container>

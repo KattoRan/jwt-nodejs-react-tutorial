@@ -1,0 +1,10 @@
+/* CSS cho active state */
+.navbar-nav .nav-link.active {
+  background-color: #0056b3; /* Thay màu nền */
+  color: white !important; /* Màu chữ */
+}
+/* Nếu bạn muốn thay đổi màu khi hover */
+.navbar-nav .nav-link:hover {
+  background-color: #0057b38c; /* Màu nền khi hover */
+  color: white !important; /* Màu chữ khi hover */
+}

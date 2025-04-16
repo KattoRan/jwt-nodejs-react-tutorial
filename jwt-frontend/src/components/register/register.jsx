@@ -149,7 +149,7 @@ const Register = () => {
                   className="btn-success"
                   type="submit"
                 >
-                  Already've an account. Login
+                  Already&apos;ve an account. Login
                 </Button>
               </Form.Group>
             </Form>

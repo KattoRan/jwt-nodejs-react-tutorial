@@ -31,7 +31,7 @@ const UserDetail = () => {
     const fetchUserDetail = async () => {
       try {
         const res = await getUser(id);
-        setUser(res.data.DT);
+        setUser(res.data.DT.user);
       } catch (err) {
         console.error("Error fetching user:", err);
       } finally {

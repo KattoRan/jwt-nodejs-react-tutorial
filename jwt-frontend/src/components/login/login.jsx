@@ -3,42 +3,50 @@ import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoginUser } from "../../service/userService";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const defaultcheckInput = {
-    isValidEmail: true,
-    isValidPassword: true,
-  };
-  const [objCheckInput, setObjCheckInput] = useState(defaultcheckInput);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPassword, setIsValidPassword] = useState(true);
   const navigate = useNavigate();
   const handleLogin = async (event) => {
     event.preventDefault();
-    let newCheck = { ...defaultcheckInput };
-    setObjCheckInput(newCheck);
+
+    // Reset validation checks
+    setIsValidEmail(true);
+    setIsValidPassword(true);
 
     if (!email) {
       toast.error("Please enter your email!");
-      newCheck.isValidEmail = false;
+      setIsValidEmail(false);
       return;
     }
+
     if (!password) {
       toast.error("Please enter your password!");
-      newCheck.isValidPassword = false;
+      setIsValidPassword(false);
       return;
     }
-    if (Object.values(newCheck).every((val) => val) === false) return;
+
     const userData = { email, password };
     try {
       const res = await LoginUser(userData);
-      if (res.data.EC == 0) {
-        navigate("/home");
+      if (res.data.EC === 0) {
+        // Đăng nhập thành công, lưu token vào localStorage
+        localStorage.setItem("access_token", res.data.DT.access_token);
         toast.success(res.data.EM);
-      } else toast.error(res.data.EM);
+        navigate("/home");
+      } else {
+        toast.error(res.data.EM);
+      }
     } catch (error) {
-      toast.error(error.response?.data?.EM || "Registration failed!");
+      toast.error(
+        error.response?.data?.EM || "An error occurred during login!"
+      );
     }
   };
+
   return (
     <div className="login_form">
       <Container>
@@ -49,45 +57,42 @@ const Login = () => {
               <Form.Group className="mb-4 mt-4" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
-                  className={objCheckInput.isValidEmail ? "" : "is-invalid"}
+                  className={isValidEmail ? "" : "is-invalid"}
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   type="email"
                   placeholder="Enter email"
                 />
                 <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
+                  We&apos;ll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
-                  className={objCheckInput.isValidPassword ? "" : "is-invalid"}
+                  className={isValidPassword ? "" : "is-invalid"}
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   type="password"
                   placeholder="Password"
                 />
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Remember" />
+                <Form.Check type="checkbox" label="Remember me" />
               </Form.Group>
+
               <Form.Group>
                 <Button className="w-100" type="submit">
                   Login
                 </Button>
-                <span>Forgot your pasword?</span>
+                <span>Forgot your password?</span>
               </Form.Group>
               <hr />
               <Form.Group className="mt-3 text-center">
-                <Button
-                  as={Link}
-                  to="/register"
-                  className="btn-success"
-                  type="submit"
-                >
-                  Creat new user
+                <Button as={Link} to="/register" className="btn-success">
+                  Create new user
                 </Button>
               </Form.Group>
             </Form>

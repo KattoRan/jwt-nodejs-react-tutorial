@@ -4,9 +4,10 @@
     "password": null,
     "database": "jwt",
     "host": "127.0.0.1",
+    "logging": false,
     "dialect": "mysql",
-    "define" : {
-      "freezeTableName" : true
+    "define": {
+      "freezeTableName": true
     }
   },
   "test": {

@@ -6,7 +6,6 @@ import bodyParser from "body-parser";
 import connection from "./config/connectDB";
 import configCors from "./config/cors";
 import initApiRoutes from "./routes/api";
-import { CreateJWT, verifyToken } from "./middleware/JWTAction";
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -19,8 +18,6 @@ configViewEngine(app);
 connection();
 
 //test jwt
-const token = CreateJWT();
-verifyToken(token);
 
 //config body-parser
 app.use(bodyParser.json());

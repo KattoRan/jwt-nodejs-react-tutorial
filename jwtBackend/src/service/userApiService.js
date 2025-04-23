@@ -1,5 +1,7 @@
 // Get the client
 import db from "../models/index";
+import dotenv from "dotenv";
+dotenv.config();
 
 const getAllUsers = async () => {
   try {
@@ -33,7 +35,7 @@ const getUser = async (id) => {
       where: { id: id },
     });
     if (user) user = user.get({ plain: true });
-    return user;
+    return { user };
   } catch (error) {
     console.error("Lỗi truy vấn:", error);
   }

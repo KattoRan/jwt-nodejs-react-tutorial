@@ -1,22 +1,22 @@
-// khai bao cac route vaf duong link url ma ta sd duoc
 import express from "express";
-import apiController from "../controller/apiController";
+import apiController from "../controller/authController";
 import userController from "../controller/userController";
+import verifyToken from "../middleware/JWTAction";
+
 const router = express.Router();
 
 const initApiRoutes = (app) => {
-  //path, handler
-
+  // Auth
   router.post("/register", apiController.handleRegister);
   router.post("/login", apiController.handleLogin);
 
-  router.get("/user-manager", userController.readFunc);
-  router.delete("/user-manager/:id", userController.deleteFunc);
-  router.get("/user-manager/:id", userController.getUserFunc);
-  router.put("/user-manager/:id", userController.updateFunc);
+  // User (cần xác thực)
+  router.get("/user-manager", verifyToken, userController.readFunc);
+  router.get("/user-manager/:id", verifyToken, userController.getUserFunc);
+  router.put("/user-manager/:id", verifyToken, userController.updateFunc);
+  router.delete("/user-manager/:id", verifyToken, userController.deleteFunc);
 
-  return app.use("/api/", router); // khai bao duong link, "/" duong link of trang home
-  // app.use khai bao tham so dau tien cua trang vd "/abc" thi .../abc/about
+  return app.use("/api", router);
 };
 
 export default initApiRoutes;
